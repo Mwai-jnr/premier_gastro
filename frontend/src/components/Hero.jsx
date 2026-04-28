@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import logo from "../assets/images/logo.png";
+
 import hero1 from "../assets/images/hero1.jpg";
 import hero2 from "../assets/images/hero2.jpg";
 import hero3 from "../assets/images/hero3.jpg";
@@ -27,10 +29,11 @@ export default function Hero() {
   // AUTO SLIDE
   useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, 6000);
+
     return () => clearInterval(interval);
-  }, [index]);
+  }, []);
 
   const nextSlide = () => {
     setIndex((prev) => (prev + 1) % slides.length);
@@ -45,16 +48,23 @@ export default function Hero() {
       
       {/* SLIDE */}
       <div
+        key={index}
         style={{
           ...slideStyle,
           backgroundImage: `url(${slides[index].image})`
         }}
       >
         <div style={overlay}>
-          <h1>{slides[index].title}</h1>
-          <p>{slides[index].text}</p>
+          
+          {/* LOGO ONLY ON FIRST SLIDE */}
+          {index === 0 && (
+            <img src={logo} alt="logo" style={logoStyle} />
+          )}
 
-          <a href="#book" style={button}>
+          <h1 style={title}>{slides[index].title}</h1>
+          <p style={text}>{slides[index].text}</p>
+
+          <a href="/book" style={button}>
             Book Appointment
           </a>
         </div>
@@ -77,7 +87,8 @@ export default function Hero() {
             onClick={() => setIndex(i)}
             style={{
               ...dot,
-              background: i === index ? "#0ea5e9" : "white"
+              background: i === index ? "#0ea5e9" : "white",
+              transform: i === index ? "scale(1.3)" : "scale(1)"
             }}
           />
         ))}
@@ -86,7 +97,7 @@ export default function Hero() {
   );
 }
 
-/* STYLES */
+/* ================= STYLES ================= */
 
 const heroContainer = {
   position: "relative",
@@ -98,12 +109,16 @@ const slideStyle = {
   height: "100%",
   backgroundSize: "cover",
   backgroundPosition: "center",
-  transition: "opacity 1s ease-in-out"
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  transition: "all 1s ease-in-out"
 };
 
 const overlay = {
-  background: "rgba(0,0,0,0.5)",
+  background: "linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6))",
   height: "100%",
+  width: "100%",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
@@ -113,14 +128,34 @@ const overlay = {
   padding: "20px"
 };
 
+const logoStyle = {
+  width: "200px",
+  marginBottom: "20px",
+  animation: "fadeIn 1.5s ease"
+};
+
+const title = {
+  fontSize: "52px",
+  fontWeight: "700",
+  letterSpacing: "1px"
+};
+
+const text = {
+  fontSize: "18px",
+  opacity: 0.9,
+  maxWidth: "500px"
+};
+
 const button = {
-  marginTop: "20px",
-  padding: "12px 25px",
-  background: "#0ea5e9",
+  marginTop: "25px",
+  padding: "14px 30px",
+  background: "rgba(14,165,233,0.9)",
   color: "white",
   textDecoration: "none",
-  borderRadius: "5px",
-  fontWeight: "bold"
+  borderRadius: "8px",
+  fontWeight: "bold",
+  backdropFilter: "blur(6px)",
+  transition: "0.3s"
 };
 
 const arrow = {
@@ -130,15 +165,16 @@ const arrow = {
   background: "rgba(0,0,0,0.5)",
   color: "white",
   border: "none",
-  fontSize: "30px",
+  fontSize: "28px",
   padding: "10px",
   cursor: "pointer",
-  borderRadius: "50%"
+  borderRadius: "50%",
+  zIndex: 2
 };
 
 const dotsContainer = {
   position: "absolute",
-  bottom: "20px",
+  bottom: "25px",
   width: "100%",
   textAlign: "center"
 };
@@ -147,7 +183,8 @@ const dot = {
   display: "inline-block",
   width: "12px",
   height: "12px",
-  margin: "0 5px",
+  margin: "0 6px",
   borderRadius: "50%",
-  cursor: "pointer"
+  cursor: "pointer",
+  transition: "all 0.3s ease"
 };

@@ -1,35 +1,51 @@
 export default function Anorectal() {
   return (
-    <div style={{ padding: "40px", maxWidth: "900px", margin: "auto" }}>
-      
+    <section style={section}>
       <h1>Anorectal Manometry</h1>
 
-      <p style={{ marginTop: "20px" }}>
-        Anorectal manometry is a diagnostic procedure used to evaluate the function
-        of the muscles in the rectum and anus. It helps in diagnosing conditions
-        such as chronic constipation and fecal incontinence.
+      <p style={intro}>
+        A specialized test used to evaluate the function of the rectum and anal sphincter muscles.
       </p>
 
-      <h2 style={{ marginTop: "30px" }}>Why is it done?</h2>
-      <ul style={{ marginTop: "10px" }}>
-        <li>Chronic constipation</li>
-        <li>Fecal incontinence</li>
-        <li>Evaluation before surgery</li>
-      </ul>
+      <div style={grid}>
+        <div className="card">
+          <h3>What It Checks</h3>
+          <p>Muscle strength and coordination.</p>
+        </div>
 
-      <h2 style={{ marginTop: "30px" }}>What to expect</h2>
-      <p>
-        A small flexible tube is inserted into the rectum to measure muscle
-        pressure and coordination. The procedure is safe and usually takes
-        about 20–30 minutes.
-      </p>
+        <div className="card">
+          <h3>Who Needs It</h3>
+          <p>Patients with constipation or incontinence.</p>
+        </div>
 
-      <h2 style={{ marginTop: "30px" }}>Preparation</h2>
-      <p>
-        Patients may be advised to use a mild enema before the procedure.
-        Detailed instructions will be provided before your appointment.
-      </p>
+        <div className="card">
+          <h3>Procedure</h3>
+          <p>Simple, safe, and minimally invasive.</p>
+        </div>
 
-    </div>
+        <div className="card">
+          <h3>Outcome</h3>
+          <p>Helps guide treatment and improve quality of life.</p>
+        </div>
+      </div>
+    </section>
   );
 }
+
+const section = {
+  padding: "80px 40px",
+  textAlign: "center"
+};
+
+const intro = {
+  maxWidth: "600px",
+  margin: "20px auto",
+  textAlign: "center"
+};
+
+const grid = {
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+  gap: "20px",
+  marginTop: "40px"
+};

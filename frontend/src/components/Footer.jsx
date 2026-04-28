@@ -1,66 +1,53 @@
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer style={footer}>
-      
       <div style={container}>
-
-        {/* LEFT - ABOUT */}
+        
+        {/* BRAND */}
         <div>
-          <h2 style={logo}>Gastro Clinic</h2>
+          <h2 style={logo}>Premier Gastro Clinic</h2>
           <p style={text}>
-            Providing specialized gastroenterology diagnostics with precision,
-            care, and patient comfort at the core of our services.
+            Providing advanced gastroenterology diagnostics with precision and care.
           </p>
-
-          <div style={socials}>
-            <FaFacebookF />
-            <FaTwitter />
-            <FaInstagram />
-            <FaLinkedinIn />
-          </div>
         </div>
 
         {/* QUICK LINKS */}
         <div>
           <h3>Quick Links</h3>
-          <ul style={list}>
-            <li>Home</li>
-            <li>Services</li>
-            <li>Appointments</li>
-          </ul>
+          <p><a href="/">Home</a></p>
+          <p><a href="/esophageal">Esophageal</a></p>
+          <p><a href="/ph-monitoring">pH Monitoring</a></p>
+          <p><a href="/anorectal">Anorectal</a></p>
+          <p><a href="/blog">Blog</a></p>
+          <p><a href="/about">About</a></p>
+          <p><a href="/contact">Contact</a></p>
+          <p><a href="/book">Book Now</a></p>
         </div>
 
         {/* CONTACT */}
         <div>
-          <h3>Contact Info</h3>
-          <p>📍 Nairobi, Kenya</p>
-          <p>📞 0790 000 300</p>
-          <p>✉️ info@gastroclinic.com</p>
-          <p>🕒 Open 24/7</p>
+          <h3>Contact</h3>
+          <p><FaPhone />  +254 727 737 394</p>
+          <p><FaEnvelope /> info@clinic.com</p>
+          <p><FaMapMarkerAlt /> 3rd Parklands Nairobi KE, 3rd Parklands Ave, Nairobi, Kenya</p>
         </div>
 
-        {/* NEWSLETTER */}
+        {/* SOCIAL */}
         <div>
-          <h3>Newsletter</h3>
-          <div style={newsletter}>
-            <input
-              type="email"
-              placeholder="Your email"
-              style={input}
-            />
-            <button style={button}>Subscribe</button>
+          <h3>Follow Us</h3>
+          <div style={socials}>
+            <FaFacebook />
+            <FaInstagram />
           </div>
         </div>
 
       </div>
 
-      {/* BOTTOM BAR */}
       <div style={bottom}>
-        © 2026 Gastro Clinic. All rights reserved.
+        © {new Date().getFullYear()} Premier Gastro Clinic. All rights reserved.
       </div>
-
     </footer>
   );
 }
@@ -68,61 +55,31 @@ export default function Footer() {
 /* STYLES */
 
 const footer = {
-  background: "#1e1b4b",
+  background: "linear-gradient(135deg, #0f172a, #1e293b)",
   color: "white",
   marginTop: "60px"
 };
-
 const container = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
   gap: "30px",
-  padding: "50px 40px"
+  padding: "60px 40px"
 };
 
 const logo = {
-  marginBottom: "10px"
+  color: "#0ea5e9"
 };
 
 const text = {
-  fontSize: "14px",
+  opacity: 0.75,
   lineHeight: "1.6"
 };
 
 const socials = {
-  marginTop: "15px",
   display: "flex",
-  gap: "10px",
-  fontSize: "18px",
-  color: "#f97316",
-  cursor: "pointer"
-};
-
-const list = {
-  listStyle: "none",
-  padding: 0,
-  lineHeight: "2"
-};
-
-const newsletter = {
-  display: "flex",
-  gap: "10px",
-  marginTop: "10px"
-};
-
-const input = {
-  padding: "10px",
-  borderRadius: "5px",
-  border: "none",
-  flex: 1
-};
-
-const button = {
-  padding: "10px 15px",
-  background: "#0ea5e9",
-  color: "white",
-  border: "none",
-  borderRadius: "5px",
+  gap: "15px",
+  fontSize: "20px",
+  marginTop: "10px",
   cursor: "pointer"
 };
 
@@ -130,5 +87,6 @@ const bottom = {
   textAlign: "center",
   padding: "15px",
   borderTop: "1px solid rgba(255,255,255,0.1)",
-  fontSize: "14px"
+  fontSize: "14px",
+  opacity: 0.7
 };

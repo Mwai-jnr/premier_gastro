@@ -1,22 +1,22 @@
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Services from "../components/Services";
+import WhyUs from "../components/WhyUs";
+import Testimonials from "../components/Testimonials";
+import Stats from "../components/Stats";
+import Map from "../components/Map";
 import AppointmentForm from "../components/AppointmentForm";
-import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <div>
-      <Navbar />
+    <>
+    <h1>HOME WORKING</h1>
       <Hero />
+      <Stats />
       <Services />
-
-      <section id="book">
-        <h2 style={{ textAlign: "center" }}>Book Appointment</h2>
-        <AppointmentForm />
-      </section>
-
-      <Footer />
-    </div>
+      <WhyUs />
+      <Testimonials />
+      <Map />
+      <AppointmentForm />
+    </>
   );
 }
