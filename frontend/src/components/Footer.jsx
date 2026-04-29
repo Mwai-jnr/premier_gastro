@@ -27,21 +27,29 @@ export default function Footer() {
         </div>
 
         {/* CONTACT */}
-        <div>
+        {/* <div>
           <h3>Contact</h3>
           <p><FaPhone />  +254 727 737 394</p>
           <p><FaEnvelope /> info@clinic.com</p>
           <p><FaMapMarkerAlt /> 3rd Parklands Nairobi KE, 3rd Parklands Ave, Nairobi, Kenya</p>
-        </div>
+        </div> */}
+        <div>
+  <h4>Contact</h4>
+  <p>📍 Nairobi, Kenya</p>
+  <p>📞 0790 000 300</p>
+  <p>✉ info@clinic.com</p>
+</div>
 
         {/* SOCIAL */}
         <div>
-          <h3>Follow Us</h3>
-          <div style={socials}>
-            <FaFacebook />
-            <FaInstagram />
-          </div>
-        </div>
+  <h4>Follow Us</h4>
+  <div style={{ display: "flex", gap: "15px" }}>
+    <span>🌐</span>
+    <span>📘</span>
+    <span>🐦</span>
+    <span>📸</span>
+  </div>
+</div>
 
       </div>
 
@@ -75,13 +83,13 @@ const text = {
   lineHeight: "1.6"
 };
 
-const socials = {
-  display: "flex",
-  gap: "15px",
-  fontSize: "20px",
-  marginTop: "10px",
-  cursor: "pointer"
-};
+// const socials = {
+//   display: "flex",
+//   gap: "15px",
+//   fontSize: "20px",
+//   marginTop: "10px",
+//   cursor: "pointer"
+// };
 
 const bottom = {
   textAlign: "center",

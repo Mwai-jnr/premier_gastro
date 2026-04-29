@@ -1,200 +1,149 @@
-import { FaClock, FaFileAlt, FaUserCheck, FaPhone, FaTimes, FaAmbulance } from "react-icons/fa";
-
 export default function Book() {
   return (
     <section style={section}>
-      <h1 style={title}>Book Your Appointment</h1>
-      <p style={{
-  color: "#64748b",
-  marginBottom: "30px"
-}}>
-  Schedule your visit with our specialists
-</p>
-      {/* <p style={subtitle}>
-        Schedule a convenient time to visit our healthcare professionals
-      </p> */}
+      
+      {/* HEADER */}
+      <div style={header}>
+        <h1>Book Your Appointment</h1>
+        <p>Simple, fast and secure scheduling with our specialists</p>
+      </div>
 
-      {/* FORM CARD */}
+      {/* FORM */}
       <div style={card}>
-   <form style={formGrid}>
-  
-  <div>
-    <label>Full Name *</label>
-    <input placeholder="Enter your full name" />
-  </div>
+        <form style={formGrid}>
 
-  <div>
-    <label>Email Address *</label>
-    <input placeholder="Enter your email" />
-  </div>
+          <Input label="Full Name *" />
+          <Input label="Email Address *" />
 
-  <div>
-    <label>Phone Number *</label>
-    <input placeholder="Enter phone number" />
-  </div>
+          <Input label="Phone Number *" />
+          <Select label="Department" />
 
-  <div>
-    <label>Department</label>
-    <select>
-      <option>Select Department</option>
-      <option>Esophageal</option>
-      <option>pH Monitoring</option>
-      <option>Anorectal</option>
-    </select>
-  </div>
+          <Input label="Preferred Date" type="date" />
+          <Input label="Preferred Time" type="time" />
 
-  <div>
-    <label>Preferred Date</label>
-    <input type="date" />
-  </div>
+          <div style={{ gridColumn: "span 2" }}>
+            <Select label="Preferred Doctor (Optional)" />
+          </div>
 
-  <div>
-    <label>Preferred Time</label>
-    <input type="time" />
-  </div>
+          <div style={{ gridColumn: "span 2" }}>
+            <textarea placeholder="Additional Notes..." />
+          </div>
 
-  <div style={{ gridColumn: "span 2" }}>
-    <label>Preferred Doctor</label>
-    <select>
-      <option>Select Doctor (Optional)</option>
-    </select>
-  </div>
+          <button style={{ gridColumn: "span 2" }}>
+            Book Appointment
+          </button>
 
-  <div style={{ gridColumn: "span 2" }}>
-    <label>Additional Notes</label>
-    <textarea placeholder="Describe your symptoms..." />
-  </div>
-
-  <button style={{ gridColumn: "span 2" }}>
-    Book Appointment
-  </button>
-
-</form>
+        </form>
       </div>
 
       {/* GUIDELINES */}
       <div style={guidelines}>
-  <h2 style={guideTitle}>Appointment Guidelines</h2>
-  <p style={guideSubtitle}>
-    Please review before your visit to ensure a smooth experience
-  </p>
+        <h2>Appointment Guidelines</h2>
 
-  <div style={guideGrid}>
-    
-    <div style={guideCard}>
-      <span style={icon}>🕒</span>
-      <h4>Working Hours</h4>
-      <p>Mon – Fri: 8AM – 6PM<br/>Sat: 9AM – 3PM</p>
-    </div>
+        <div style={grid}>
+          {cards.map((item, i) => (
+            <div key={i} style={cardItem}>
+              <div style={iconCircle}>{item.icon}</div>
+              <h4>{item.title}</h4>
+              <p>{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-    <div style={guideCard}>
-      <span style={icon}>📄</span>
-      <h4>Bring Documents</h4>
-      <p>Carry ID, insurance card and previous medical records</p>
-    </div>
-
-    <div style={guideCard}>
-      <span style={icon}>⏰</span>
-      <h4>Arrive Early</h4>
-      <p>Arrive at least 15 minutes before your appointment</p>
-    </div>
-
-    <div style={guideCard}>
-      <span style={icon}>📞</span>
-      <h4>Confirmation</h4>
-      <p>You will receive an SMS confirmation after booking</p>
-    </div>
-
-    <div style={guideCard}>
-      <span style={icon}>❌</span>
-      <h4>Cancellation</h4>
-      <p>Please cancel at least 24 hours in advance</p>
-    </div>
-
-    <div style={guideCard}>
-      <span style={icon}>🚑</span>
-      <h4>Emergency</h4>
-      <p>Visit emergency or call us for urgent cases</p>
-    </div>
-
-  </div>
-</div>
     </section>
   );
 }
 
+/* REUSABLE INPUT */
+function Input({ label, type = "text" }) {
+  return (
+    <div>
+      <label>{label}</label>
+      <input type={type} placeholder={label} />
+    </div>
+  );
+}
+
+function Select({ label }) {
+  return (
+    <div>
+      <label>{label}</label>
+      <select>
+        <option>Select</option>
+      </select>
+    </div>
+  );
+}
+
+/* DATA */
+const cards = [
+  { icon: "🕒", title: "Working Hours", text: "Mon–Fri: 8AM–6PM" },
+  { icon: "📄", title: "Documents", text: "Carry ID & medical records" },
+  { icon: "⏰", title: "Arrive Early", text: "15 minutes before time" },
+  { icon: "📞", title: "Confirmation", text: "SMS confirmation sent" },
+  { icon: "❌", title: "Cancellation", text: "24 hrs notice required" },
+  { icon: "🚑", title: "Emergency", text: "Visit ER if urgent" }
+];
+
 /* STYLES */
 
 const section = {
-  padding: "80px 20px",
-  background: "#f8fafc",
-  textAlign: "center"
+  padding: "100px 20px",
+  background: "var(--light)"
 };
 
-const title = {
-  fontSize: "32px"
+const header = {
+  textAlign: "center",
+  marginBottom: "40px"
 };
-
-// const subtitle = {
-//   marginBottom: "30px",
-//   opacity: 0.7
-// };
 
 const card = {
   maxWidth: "900px",
   margin: "auto",
-  background: "#ffffff",
   padding: "40px",
   borderRadius: "16px",
-  boxShadow: "0 20px 60px rgba(0,0,0,0.08)",
-  border: "1px solid #f1f5f9"
+  background: "rgba(255,255,255,0.9)",
+  backdropFilter: "blur(10px)",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.08)"
 };
 
 const formGrid = {
   display: "grid",
   gridTemplateColumns: "1fr 1fr",
-  gap: "15px"
+  gap: "20px"
 };
 
 const guidelines = {
   marginTop: "60px",
-  padding: "40px 20px",
-  background: "#f8fafc",
-  borderRadius: "16px"
+  textAlign: "center"
 };
 
-const guideGrid = {
+const grid = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
   gap: "20px",
-  maxWidth: "1100px",
-  margin: "auto"
+  marginTop: "30px"
 };
 
-const guideTitle = {
-  textAlign: "center",
-  fontSize: "26px",
-  fontWeight: "700"
-};
-
-const guideSubtitle = {
-  textAlign: "center",
-  color: "#64748b",
-  marginBottom: "30px"
-};
-
-const guideCard = {
-  background: "#ffffff",
+const cardItem = {
+  background: "#fff",
   padding: "25px",
   borderRadius: "14px",
-  textAlign: "center",
   boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-  transition: "all 0.3s ease",
-  cursor: "pointer"
+  transition: "0.3s"
 };
 
-const icon = {
-  fontSize: "28px",
-  display: "block",
+const iconCircle = {
+  width: "50px",
+  height: "50px",
+  margin: "auto",
+  borderRadius: "50%",
+  background: "var(--gradient)",
+  color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: "20px",
   marginBottom: "10px"
 };

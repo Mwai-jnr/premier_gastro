@@ -4,8 +4,8 @@ import logo from "../assets/images/logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdown, setDropdown] = useState(false);
+const [menuOpen, setMenuOpen] = useState(false);
+const [dropdown, setDropdown] = useState(false);
 
   const location = useLocation();
   const isHome = location.pathname === "/";
@@ -37,27 +37,34 @@ export default function Navbar() {
         <Link to="/about" style={link}>About</Link>
 
         {/* DROPDOWN */}
-        <div
-          style={dropdownContainer}
-          onMouseEnter={() => setDropdown(true)}
-        >
-          <span style={link}>Services ▾</span>
+       {/* <div
+  style={dropdownContainer}
+  onMouseEnter={() => setDropdown(true)}
+  onMouseLeave={() => setDropdown(false)}
+>
+          <span style={link}>Services ▾</span> */}
 
           <div
-            style={{
-              ...dropdownMenu,
-              opacity: dropdown ? 1 : 0,
-              visibility: dropdown ? "visible" : "hidden",
-              transform: dropdown ? "translateY(0)" : "translateY(10px)"
-            }}
-            onMouseEnter={() => setDropdown(true)}
-            onMouseLeave={() => setDropdown(false)}
-          >
-            <Link to="/esophageal" style={dropdownItem}>Esophageal</Link>
-            <Link to="/ph-monitoring" style={dropdownItem}>pH Monitoring</Link>
-            <Link to="/anorectal" style={dropdownItem}>Anorectal</Link>
-          </div>
-        </div>
+  style={dropdownContainer}
+  onMouseEnter={() => setDropdown(true)}
+  onMouseLeave={() => setDropdown(false)}
+>
+  <span style={link}>Services ▾</span>
+
+  <div
+    style={{
+      ...dropdownMenu,
+      opacity: dropdown ? 1 : 0,
+      visibility: dropdown ? "visible" : "hidden",
+      transform: dropdown ? "translateY(0)" : "translateY(10px)"
+    }}
+  >
+    <Link to="/esophageal" style={dropdownItem}>Esophageal</Link>
+    <Link to="/ph-monitoring" style={dropdownItem}>pH Monitoring</Link>
+    <Link to="/anorectal" style={dropdownItem}>Anorectal</Link>
+  </div>
+</div>
+        
 
         <Link to="/blog" style={link}>Blog</Link>
         <Link to="/contact" style={link}>Contact</Link>
@@ -125,20 +132,22 @@ const dropdownContainer = {
 
 const dropdownMenu = {
   position: "absolute",
-  top: "35px",
+  top: "40px",
   left: 0,
-  background: "white",
+  background: "#fff",
   padding: "10px",
   borderRadius: "10px",
   boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-  transition: "all 0.3s ease"
+  transition: "all 0.25s ease"
 };
 
 const dropdownItem = {
   display: "block",
-  padding: "8px 15px",
+  padding: "10px 15px",
   textDecoration: "none",
-  color: "#1e293b"
+  color: "#1e293b",
+  borderRadius: "6px",
+  transition: "0.2s"
 };
 
 /* MOBILE */

@@ -12,19 +12,24 @@ export default function Contact() {
         
         {/* LEFT INFO CARD */}
         <div style={infoCard}>
-          <h3>Get In Touch</h3>
+         <h3 style={{ fontSize: "22px", marginBottom: "10px" }}>
+  Get In Touch
+</h3>
 
-          <p><strong>📍 Address</strong><br/>
-          Park Medical Centre (PMC), Parklands, Nairobi</p>
+<p style={{ opacity: 0.9 }}>
+  📍 <strong>Address</strong><br/>
+  Parklands, Nairobi
+</p>
 
-          <p><strong>📞 Phone</strong><br/>
-          0790 000 300</p>
+<p style={{ opacity: 0.9 }}>
+  📞 <strong>Phone</strong><br/>
+  0790 000 300
+</p>
 
-          <p><strong>✉ Email</strong><br/>
-          info@clinic.com</p>
-
-          <p><strong>🕒 Working Hours</strong><br/>
-          Open 24/7</p>
+<p style={{ opacity: 0.9 }}>
+  ✉ <strong>Email</strong><br/>
+  info@clinic.com
+</p>
         </div>
 
         {/* FORM */}
@@ -77,12 +82,14 @@ const container = {
 };
 
 const infoCard = {
-  background: "linear-gradient(135deg, #0ea5e9, #2563eb)",
-  color: "white",
-  padding: "30px",
-  borderRadius: "12px",
-  textAlign: "left",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.1)"
+  background: "var(--gradient)", // important
+  color: "#1e293b",
+  padding: "35px",
+  borderRadius: "16px",
+  boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
+  display: "flex",
+  flexDirection: "column",
+  gap: "20px"
 };
 
 const form = {
@@ -98,3 +105,8 @@ const form = {
 const mapSection = {
   marginTop: "60px"
 };
+
+// h3: {
+//   fontWeight: "700",
+//   letterSpacing: "0.5px"
+// };
