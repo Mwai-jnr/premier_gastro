@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premier Gastro Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css" />
+  </head>
+  <body>
+    <main class="dashboard-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <span class="brand-mark">PG</span>
+          <div>
+            <strong>Premier Gastro</strong>
+            <small>Clinic operations</small>
+          </div>
+        </div>
+
+        <nav class="side-nav" aria-label="Dashboard sections">
+          <button class="is-active" data-section="overview">Overview</button>
+          <button data-section="appointments">Appointments</button>
+          <button data-section="contacts">Contact Messages</button>
+        </nav>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Backend Dashboard</p>
+            <h1>Reports, bookings, and client replies</h1>
+          </div>
+          <button id="refreshBtn" class="ghost-button" type="button">Refresh</button>
+        </header>
+
+        <section id="overview" class="section-panel is-active">
+          <div class="stat-grid">
+            <article class="stat-card">
+              <span>Total bookings</span>
+              <strong id="totalAppointments">0</strong>
+              <small>All booking form submissions</small>
+            </article>
+            <article class="stat-card accent">
+              <span>Pending bookings</span>
+              <strong id="pendingAppointments">0</strong>
+              <small>Need confirmation</small>
+            </article>
+            <article class="stat-card">
+              <span>Contact messages</span>
+              <strong id="totalContacts">0</strong>
+              <small>All contact form submissions</small>
+            </article>
+            <article class="stat-card warn">
+              <span>Unanswered</span>
+              <strong id="unansweredContacts">0</strong>
+              <small>Need feedback</small>
+            </article>
+          </div>
+
+          <div class="report-grid">
+            <article class="report-panel">
+              <div class="panel-heading">
+                <h2>Appointment Status</h2>
+                <span id="appointmentReportTotal">0 records</span>
+              </div>
+              <div id="appointmentBars" class="bar-list"></div>
+            </article>
+
+            <article class="report-panel">
+              <div class="panel-heading">
+                <h2>Contact Status</h2>
+                <span id="contactReportTotal">0 records</span>
+              </div>
+              <div id="contactBars" class="bar-list"></div>
+            </article>
+          </div>
+
+          <div class="report-grid">
+            <article class="report-panel">
+              <div class="panel-heading">
+                <h2>Recent Bookings</h2>
+                <span>Latest activity</span>
+              </div>
+              <div id="recentAppointments" class="activity-list"></div>
+            </article>
+
+            <article class="report-panel">
+              <div class="panel-heading">
+                <h2>Recent Messages</h2>
+                <span>Latest activity</span>
+              </div>
+              <div id="recentContacts" class="activity-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section id="appointments" class="section-panel">
+          <div class="table-toolbar">
+            <div>
+              <h2>Booking Form Reports</h2>
+              <p>Confirm appointments, update their progress, and record client feedback.</p>
+            </div>
+            <div class="toolbar-actions">
+              <select id="appointmentFilter">
+                <option value="all">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <input id="appointmentSearch" type="search" placeholder="Search bookings" />
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Service</th>
+                  <th>Preferred Slot</th>
+                  <th>Status</th>
+                  <th>Feedback</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="appointmentsTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="contacts" class="section-panel">
+          <div class="table-toolbar">
+            <div>
+              <h2>Contact Form Reports</h2>
+              <p>Review messages and keep track of client responses.</p>
+            </div>
+            <div class="toolbar-actions">
+              <select id="contactFilter">
+                <option value="all">All statuses</option>
+                <option value="new">New</option>
+                <option value="replied">Replied</option>
+                <option value="archived">Archived</option>
+              </select>
+              <input id="contactSearch" type="search" placeholder="Search messages" />
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Subject</th>
+                  <th>Message</th>
+                  <th>Status</th>
+                  <th>Feedback</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="contactsTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="feedbackDialog">
+      <form method="dialog" class="dialog-card">
+        <div class="panel-heading">
+          <div>
+            <h2 id="dialogTitle">Client Feedback</h2>
+            <span id="dialogSubtitle"></span>
+          </div>
+          <button type="button" id="closeDialog" class="icon-button" aria-label="Close">x</button>
+        </div>
+        <label for="feedbackText">Feedback to client</label>
+        <textarea id="feedbackText" rows="6" placeholder="Write the response given to the client..."></textarea>
+        <label for="internalNotes">Internal notes</label>
+        <textarea id="internalNotes" rows="3" placeholder="Private notes for clinic staff..."></textarea>
+        <div class="dialog-actions">
+          <button type="button" id="saveFeedback" class="primary-button">Save Feedback</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="/dashboard.js" type="module"></script>
+  </body>
+</html>

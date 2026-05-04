@@ -1,4 +1,63 @@
+import { useState } from "react";
+
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export default function Book() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    preferredDate: "",
+    preferredTime: "",
+    doctor: "",
+    notes: ""
+  });
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+
+  const updateField = (field, value) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const response = await fetch(`${API_BASE}/api/appointments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Unable to submit appointment");
+      }
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        preferredDate: "",
+        preferredTime: "",
+        doctor: "",
+        notes: ""
+      });
+      setStatus({
+        type: "success",
+        message: "Your appointment request has been received. The clinic team will confirm the booking shortly."
+      });
+    } catch (error) {
+      setStatus({ type: "error", message: error.message });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section style={section}>
       
@@ -10,27 +69,37 @@ export default function Book() {
 
       {/* FORM */}
       <div style={card}>
-        <form style={formGrid}>
+        <form style={formGrid} onSubmit={handleSubmit}>
 
-          <Input label="Full Name *" />
-          <Input label="Email Address *" />
+          <Input label="Full Name *" value={form.name} onChange={(value) => updateField("name", value)} />
+          <Input label="Email Address *" type="email" value={form.email} onChange={(value) => updateField("email", value)} />
 
-          <Input label="Phone Number *" />
-          <Select label="Select Test *" options={tests} />
+          <Input label="Phone Number *" value={form.phone} onChange={(value) => updateField("phone", value)} />
+          <Select label="Select Test *" value={form.service} onChange={(value) => updateField("service", value)} options={tests} />
 
-          <Input label="Preferred Date" type="date" />
-          <Input label="Preferred Time" type="time" />
+          <Input label="Preferred Date" type="date" value={form.preferredDate} onChange={(value) => updateField("preferredDate", value)} />
+          <Input label="Preferred Time" type="time" value={form.preferredTime} onChange={(value) => updateField("preferredTime", value)} />
 
           <div style={{ gridColumn: "span 2" }}>
-            <Select label="Preferred Doctor (Optional)" />
+            <Select label="Preferred Doctor (Optional)" value={form.doctor} onChange={(value) => updateField("doctor", value)} options={doctors} placeholder="Select a doctor" />
           </div>
 
           <div style={{ gridColumn: "span 2" }}>
-            <textarea placeholder="Additional Notes..." />
+            <textarea
+              placeholder="Additional Notes..."
+              value={form.notes}
+              onChange={(event) => updateField("notes", event.target.value)}
+            />
           </div>
 
-          <button style={{ gridColumn: "span 2" }}>
-            Book Appointment
+          {status.message ? (
+            <p style={{ ...notice, ...(status.type === "error" ? errorNotice : successNotice) }}>
+              {status.message}
+            </p>
+          ) : null}
+
+          <button style={{ gridColumn: "span 2" }} disabled={submitting}>
+            {submitting ? "Submitting..." : "Book Appointment"}
           </button>
 
         </form>
@@ -56,23 +125,28 @@ export default function Book() {
 }
 
 /* REUSABLE INPUT */
-function Input({ label, type = "text" }) {
+function Input({ label, type = "text", value, onChange }) {
   return (
     <div>
       <label>{label}</label>
-      <input type={type} placeholder={label} />
+      <input
+        type={type}
+        placeholder={label}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      />
     </div>
   );
 }
 
-function Select({ label, options = [] }) {
+function Select({ label, options = [], value, onChange, placeholder = "Select a test" }) {
   return (
     <div>
       <label>{label}</label>
-      <select>
-        <option>Select a test</option>
+      <select value={value} onChange={(event) => onChange(event.target.value)}>
+        <option value="">{placeholder}</option>
         {options.map((option) => (
-          <option key={option}>{option}</option>
+          <option key={option} value={option}>{option}</option>
         ))}
       </select>
     </div>
@@ -84,6 +158,11 @@ const tests = [
   "Esophageal Manometry",
   "Esophageal pH studies",
   "Anorectal Manometry"
+];
+
+const doctors = [
+  "Any available specialist",
+  "Dr. Premier Gastro Team"
 ];
 
 const cards = [
@@ -121,6 +200,25 @@ const formGrid = {
   display: "grid",
   gridTemplateColumns: "1fr 1fr",
   gap: "20px"
+};
+
+const notice = {
+  borderRadius: "12px",
+  fontWeight: 700,
+  gridColumn: "span 2",
+  lineHeight: 1.5,
+  margin: 0,
+  padding: "14px 16px"
+};
+
+const successNotice = {
+  background: "#e9fbf4",
+  color: "#087653"
+};
+
+const errorNotice = {
+  background: "#fff0f0",
+  color: "#a12626"
 };
 
 const guidelines = {

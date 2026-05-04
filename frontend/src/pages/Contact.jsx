@@ -1,7 +1,59 @@
+import { useState } from "react";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import Map from "../components/Map";
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+
+  const updateField = (field, value) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setStatus({ type: "", message: "" });
+
+    try {
+      const response = await fetch(`${API_BASE}/api/contacts`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form)
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Unable to send message");
+      }
+
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+      });
+      setStatus({
+        type: "success",
+        message: "Your message has been received. The clinic team will get back to you shortly."
+      });
+    } catch (error) {
+      setStatus({ type: "error", message: error.message });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <main className="contact-page">
       <section className="contact-hero">
@@ -21,14 +73,43 @@ export default function Contact() {
           <p><FaEnvelope /> <span>Premiergastro@gmail.com</span></p>
         </aside>
 
-        <form className="contact-form">
+        <form className="contact-form" onSubmit={handleSubmit}>
           <h2>Send a message</h2>
-          <input placeholder="Full Name *" />
-          <input placeholder="Email Address *" />
-          <input placeholder="Phone Number" />
-          <input placeholder="Subject *" />
-          <textarea placeholder="Message *" rows="5" />
-          <button type="submit" className="btn-primary">Send Message</button>
+          <input
+            placeholder="Full Name *"
+            value={form.name}
+            onChange={(event) => updateField("name", event.target.value)}
+          />
+          <input
+            type="email"
+            placeholder="Email Address *"
+            value={form.email}
+            onChange={(event) => updateField("email", event.target.value)}
+          />
+          <input
+            placeholder="Phone Number"
+            value={form.phone}
+            onChange={(event) => updateField("phone", event.target.value)}
+          />
+          <input
+            placeholder="Subject *"
+            value={form.subject}
+            onChange={(event) => updateField("subject", event.target.value)}
+          />
+          <textarea
+            placeholder="Message *"
+            rows="5"
+            value={form.message}
+            onChange={(event) => updateField("message", event.target.value)}
+          />
+          {status.message ? (
+            <p className={`form-notice ${status.type === "error" ? "is-error" : "is-success"}`}>
+              {status.message}
+            </p>
+          ) : null}
+          <button type="submit" className="btn-primary" disabled={submitting}>
+            {submitting ? "Sending..." : "Send Message"}
+          </button>
         </form>
       </section>
 
