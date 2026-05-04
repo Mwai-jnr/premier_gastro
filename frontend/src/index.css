@@ -127,9 +127,9 @@ form button {
 }
 
 .nav-brand img {
-  height: 54px;
+  height: 64px;
   object-fit: contain;
-  width: 190px;
+  width: 220px;
 }
 
 .nav-links {
@@ -270,7 +270,7 @@ form button {
 .hero-logo {
   height: auto;
   margin-bottom: 22px;
-  max-width: 290px;
+  max-width: 340px;
 }
 
 .hero-copy h1,
@@ -967,8 +967,8 @@ footer a {
   }
 
   .nav-brand img {
-    height: 46px;
-    width: 155px;
+    height: 50px;
+    width: 170px;
   }
 
   .premium-hero,
@@ -981,7 +981,7 @@ footer a {
   }
 
   .hero-logo {
-    max-width: 220px;
+    max-width: 250px;
   }
 
   .hero-actions,
