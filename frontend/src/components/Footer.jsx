@@ -40,7 +40,7 @@ export default function Footer() {
       </div>
 
       <div style={bottom}>
-        Copyright {new Date().getFullYear()} Premier Gastroenterology & Motility Centre. All rights reserved.
+        Copyright {new Date().getFullYear()} Premier Gastroenterology & Motility Centre. All rights reserved. Designed by Vex Logic.
       </div>
     </footer>
   );
