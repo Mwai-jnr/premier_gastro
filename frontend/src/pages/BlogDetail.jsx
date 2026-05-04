@@ -12,7 +12,7 @@ if (isNaN(index) || !blog) {
   return (
     <section style={section}>
         <button onClick={() => window.history.back()} style={backBtn}>
-  ← Back to Blog
+  Back to Blog
 </button>
       <img src={blog.image} style={heroImg} />
 

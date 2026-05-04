@@ -16,7 +16,7 @@ export default function Book() {
           <Input label="Email Address *" />
 
           <Input label="Phone Number *" />
-          <Select label="Department" />
+          <Select label="Select Test *" options={tests} />
 
           <Input label="Preferred Date" type="date" />
           <Input label="Preferred Time" type="time" />
@@ -65,18 +65,27 @@ function Input({ label, type = "text" }) {
   );
 }
 
-function Select({ label }) {
+function Select({ label, options = [] }) {
   return (
     <div>
       <label>{label}</label>
       <select>
-        <option>Select</option>
+        <option>Select a test</option>
+        {options.map((option) => (
+          <option key={option}>{option}</option>
+        ))}
       </select>
     </div>
   );
 }
 
 /* DATA */
+const tests = [
+  "Esophageal Manometry",
+  "Esophageal pH studies",
+  "Anorectal Manometry"
+];
+
 const cards = [
   { icon: "🕒", title: "Working Hours", text: "Mon–Fri: 8AM–6PM" },
   { icon: "📄", title: "Documents", text: "Carry ID & medical records" },

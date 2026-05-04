@@ -6,7 +6,7 @@ export default function Map() {
       <div style={{ marginTop: "20px", borderRadius: "10px", overflow: "hidden" }}>
         <iframe
           title="Clinic Location"
-          src="https://www.google.com/maps?q=Park+Medical+Centre+PMC+Parklands+Nairobi&output=embed"
+          src="https://www.google.com/maps?q=Park+Medical+Centre+PMC+6th+floor+suite+608+3rd+Parklands+Avenue+Parklands+Nairobi&output=embed"
           width="100%"
           height="400"
           style={{ border: 0 }}

@@ -1,100 +1,97 @@
-import { FaFacebook, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaEnvelope, FaFacebook, FaInstagram, FaMapMarkerAlt, FaPhone, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
   return (
     <footer style={footer}>
       <div style={container}>
-        
-        {/* BRAND */}
         <div>
-          <h2 style={logo}>Premier Gastro Clinic</h2>
+          <h2 style={logo}>Premier Gastro</h2>
           <p style={text}>
-            Providing advanced gastroenterology diagnostics with precision and care.
+            Specialist gastroenterology and motility diagnostics delivered with precision, privacy, and care.
           </p>
         </div>
 
-        {/* QUICK LINKS */}
         <div>
-          <h3>Quick Links</h3>
-          <p><a href="/">Home</a></p>
-          <p><a href="/esophageal">Esophageal</a></p>
-          <p><a href="/ph-monitoring">pH Monitoring</a></p>
-          <p><a href="/anorectal">Anorectal</a></p>
-          <p><a href="/blog">Blog</a></p>
-          <p><a href="/about">About</a></p>
-          <p><a href="/contact">Contact</a></p>
-          <p><a href="/book">Book Now</a></p>
+          <h3 style={heading}>Services</h3>
+          <p><Link to="/esophageal">Esophageal Manometry</Link></p>
+          <p><Link to="/ph-monitoring">Esophageal pH studies</Link></p>
+          <p><Link to="/anorectal">Anorectal Manometry</Link></p>
+          <p><Link to="/book">Book Appointment</Link></p>
         </div>
 
-        {/* CONTACT */}
-        {/* <div>
-          <h3>Contact</h3>
-          <p><FaPhone />  +254 727 737 394</p>
-          <p><FaEnvelope /> info@clinic.com</p>
-          <p><FaMapMarkerAlt /> 3rd Parklands Nairobi KE, 3rd Parklands Ave, Nairobi, Kenya</p>
-        </div> */}
         <div>
-  <h4>Contact</h4>
-  <p>📍 Nairobi, Kenya</p>
-  <p>📞 0790 000 300</p>
-  <p>✉ info@clinic.com</p>
-</div>
+          <h3 style={heading}>Contact</h3>
+          <p style={contactLine}>
+            <FaMapMarkerAlt /> Park Medical Centre (PMC), 6th floor, suite 608, 3rd Parklands Avenue, Parklands, Nairobi
+          </p>
+          <p style={contactLine}><FaPhone /> 0727737394</p>
+          <p style={contactLine}><FaEnvelope /> Premiergastro@gmail.com</p>
+        </div>
 
-        {/* SOCIAL */}
         <div>
-  <h4>Follow Us</h4>
-  <div style={{ display: "flex", gap: "15px" }}>
-    <span>🌐</span>
-    <span>📘</span>
-    <span>🐦</span>
-    <span>📸</span>
-  </div>
-</div>
-
+          <h3 style={heading}>Follow</h3>
+          <div style={socials}>
+            <a href="https://wa.me/254727737394" aria-label="WhatsApp"><FaWhatsapp /></a>
+            <a href="/" aria-label="Facebook"><FaFacebook /></a>
+            <a href="/" aria-label="Instagram"><FaInstagram /></a>
+          </div>
+        </div>
       </div>
 
       <div style={bottom}>
-        © {new Date().getFullYear()} Premier Gastro Clinic. All rights reserved.
+        Copyright {new Date().getFullYear()} Premier Gastroenterology & Motility Centre. All rights reserved.
       </div>
     </footer>
   );
 }
 
-/* STYLES */
-
 const footer = {
-  background: "linear-gradient(135deg, #0f172a, #1e293b)",
+  background: "linear-gradient(135deg, #031530, #052a66)",
   color: "white",
-  marginTop: "60px"
+  marginTop: 0
 };
+
 const container = {
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
   gap: "30px",
-  padding: "60px 40px"
+  padding: "58px clamp(20px, 5vw, 56px)"
 };
 
 const logo = {
-  color: "#0ea5e9"
+  color: "#16b8c7",
+  marginBottom: "12px"
+};
+
+const heading = {
+  marginBottom: "14px"
 };
 
 const text = {
-  opacity: 0.75,
-  lineHeight: "1.6"
+  color: "rgba(255,255,255,0.72)",
+  lineHeight: "1.7",
+  maxWidth: "340px"
 };
 
-// const socials = {
-//   display: "flex",
-//   gap: "15px",
-//   fontSize: "20px",
-//   marginTop: "10px",
-//   cursor: "pointer"
-// };
+const contactLine = {
+  alignItems: "center",
+  color: "rgba(255,255,255,0.78)",
+  display: "flex",
+  gap: "10px",
+  marginBottom: "10px"
+};
+
+const socials = {
+  display: "flex",
+  gap: "12px",
+  fontSize: "22px"
+};
 
 const bottom = {
-  textAlign: "center",
-  padding: "15px",
   borderTop: "1px solid rgba(255,255,255,0.1)",
+  color: "rgba(255,255,255,0.62)",
   fontSize: "14px",
-  opacity: 0.7
+  padding: "16px 20px",
+  textAlign: "center"
 };

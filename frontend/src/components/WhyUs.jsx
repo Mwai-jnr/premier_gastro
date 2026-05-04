@@ -1,48 +1,44 @@
-import { FaUserMd, FaMicroscope, FaClock } from "react-icons/fa";
+import { FaClock, FaMicroscope, FaUserMd } from "react-icons/fa";
+
+const items = [
+  {
+    icon: FaUserMd,
+    title: "Specialist-led care",
+    text: "A focused team for gastroenterology and motility diagnostics."
+  },
+  {
+    icon: FaMicroscope,
+    title: "Objective results",
+    text: "Testing that translates complex symptoms into measurable clinical data."
+  },
+  {
+    icon: FaClock,
+    title: "Prepared visits",
+    text: "Clear appointment guidance so patients arrive confident and ready."
+  }
+];
 
 export default function WhyUs() {
   return (
-    <div style={section}>
-      <h2>Why Choose Our Clinic</h2>
-
-      <div style={grid}>
-        <div style={card}>
-          <FaUserMd size={40} color="#0ea5e9" />
-          <h3>Expert Specialists</h3>
-          <p>Highly trained gastroenterology professionals.</p>
-        </div>
-
-        <div style={card}>
-          <FaMicroscope size={40} color="#0ea5e9" />
-          <h3>Advanced Diagnostics</h3>
-          <p>State-of-the-art equipment and accurate testing.</p>
-        </div>
-
-        <div style={card}>
-          <FaClock size={40} color="#0ea5e9" />
-          <h3>Quick Appointments</h3>
-          <p>Fast and convenient scheduling for all patients.</p>
-        </div>
+    <section className="home-section why-section">
+      <div className="section-heading">
+        <span className="eyebrow">Why Premier</span>
+        <h2>A calmer path to answers for digestive symptoms</h2>
       </div>
-    </div>
+
+      <div className="why-grid">
+        {items.map((item) => {
+          const Icon = item.icon;
+
+          return (
+            <article className="why-item" key={item.title}>
+              <Icon />
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
   );
 }
-
-const section = {
-  padding: "60px 40px",
-  textAlign: "center"
-};
-
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "20px",
-  marginTop: "30px"
-};
-
-const card = {
-  transition: "0.3s",
-  cursor: "pointer"
-  
-};
-

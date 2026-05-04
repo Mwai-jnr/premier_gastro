@@ -33,7 +33,7 @@ export default function AppointmentForm() {
       >
         <option>Select Service</option>
         <option>Esophageal Manometry</option>
-        <option>pH Monitoring</option>
+        <option>Esophageal pH studies</option>
         <option>Anorectal Manometry</option>
       </select>
 

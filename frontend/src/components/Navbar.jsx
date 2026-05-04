@@ -1,169 +1,75 @@
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FaBars, FaChevronDown, FaTimes } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
+
+const services = [
+  { label: "Esophageal Manometry", to: "/esophageal" },
+  { label: "Esophageal pH studies", to: "/ph-monitoring" },
+  { label: "Anorectal Manometry", to: "/anorectal" }
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-const [menuOpen, setMenuOpen] = useState(false);
-const [dropdown, setDropdown] = useState(false);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 32);
     };
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+    setDropdown(false);
+  }, [location.pathname]);
+
   return (
-    <nav style={{ ...nav, ...(scrolled || !isHome ? navScrolled : {}) }}>
-      
-      {/* LOGO */}
-      <img src={logo} alt="logo" style={logoStyle} />
+    <nav className={`site-nav ${scrolled || location.pathname !== "/" ? "is-scrolled" : ""}`}>
+      <Link to="/" className="nav-brand" aria-label="Premier Gastro home">
+        <img src={logo} alt="Premier Gastroenterology & Motility Centre" />
+      </Link>
 
-      {/* HAMBURGER */}
-      <div style={hamburger} onClick={() => setMenuOpen(!menuOpen)}>
-        ☰
-      </div>
+      <button
+        type="button"
+        className="nav-toggle"
+        onClick={() => setMenuOpen((open) => !open)}
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+      >
+        {menuOpen ? <FaTimes /> : <FaBars />}
+      </button>
 
-      {/* LINKS */}
-      <div style={{ ...links, ...(menuOpen ? mobileMenu : {}) }}>
-        
-        <Link to="/" style={link}>Home</Link>
-        <Link to="/about" style={link}>About</Link>
+      <div className={`nav-links ${menuOpen ? "is-open" : ""}`}>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
 
-        {/* DROPDOWN */}
-       {/* <div
-  style={dropdownContainer}
-  onMouseEnter={() => setDropdown(true)}
-  onMouseLeave={() => setDropdown(false)}
->
-          <span style={link}>Services ▾</span> */}
+        <div
+          className="nav-dropdown"
+          onMouseEnter={() => setDropdown(true)}
+          onMouseLeave={() => setDropdown(false)}
+        >
+          <button type="button" onClick={() => setDropdown((open) => !open)}>
+            Services <FaChevronDown />
+          </button>
+          <div className={`dropdown-menu ${dropdown ? "is-open" : ""}`}>
+            {services.map((service) => (
+              <Link to={service.to} key={service.to}>
+                {service.label}
+              </Link>
+            ))}
+          </div>
+        </div>
 
-          <div
-  style={dropdownContainer}
-  onMouseEnter={() => setDropdown(true)}
-  onMouseLeave={() => setDropdown(false)}
->
-  <span style={link}>Services ▾</span>
-
-  <div
-    style={{
-      ...dropdownMenu,
-      opacity: dropdown ? 1 : 0,
-      visibility: dropdown ? "visible" : "hidden",
-      transform: dropdown ? "translateY(0)" : "translateY(10px)"
-    }}
-  >
-    <Link to="/esophageal" style={dropdownItem}>Esophageal</Link>
-    <Link to="/ph-monitoring" style={dropdownItem}>pH Monitoring</Link>
-    <Link to="/anorectal" style={dropdownItem}>Anorectal</Link>
-  </div>
-</div>
-        
-
-        <Link to="/blog" style={link}>Blog</Link>
-        <Link to="/contact" style={link}>Contact</Link>
-        <Link to="/book" style={cta}>Book</Link>
-
+        <Link to="/blog">Blog</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/book" className="nav-cta">Book</Link>
       </div>
     </nav>
   );
 }
-
-/* STYLES */
-
-const nav = {
-  position: "fixed",
-  top: 0,
-  width: "100%",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: "15px 40px",
-  zIndex: 1000,
-  background: "rgba(255,255,255,0.05)",
-  backdropFilter: "blur(10px)",
-  transition: "all 0.3s ease"
-};
-
-const navScrolled = {
-  background: "#ffffff",
-  boxShadow: "0 5px 20px rgba(0,0,0,0.08)",
-  padding: "10px 40px"
-};
-
-const logoStyle = {
-  height: "50px",
-  transition: "0.3s"
-};
-
-const links = {
-  display: "flex",
-  gap: "25px",
-  alignItems: "center"
-};
-
-const link = {
-  textDecoration: "none",
-  color: "#1e293b",
-  fontWeight: "500",
-  transition: "0.3s"
-};
-
-const cta = {
-  padding: "10px 20px",
-  background: "#0ea5e9",
-  color: "white",
-  borderRadius: "6px",
-  textDecoration: "none",
-  fontWeight: "600"
-};
-
-/* DROPDOWN */
-
-const dropdownContainer = {
-  position: "relative"
-};
-
-const dropdownMenu = {
-  position: "absolute",
-  top: "40px",
-  left: 0,
-  background: "#fff",
-  padding: "10px",
-  borderRadius: "10px",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-  transition: "all 0.25s ease"
-};
-
-const dropdownItem = {
-  display: "block",
-  padding: "10px 15px",
-  textDecoration: "none",
-  color: "#1e293b",
-  borderRadius: "6px",
-  transition: "0.2s"
-};
-
-/* MOBILE */
-
-const hamburger = {
-  display: "none",
-  fontSize: "24px",
-  cursor: "pointer"
-};
-
-const mobileMenu = {
-  position: "absolute",
-  top: "70px",
-  left: 0,
-  width: "100%",
-  background: "white",
-  flexDirection: "column",
-  padding: "20px"
-};

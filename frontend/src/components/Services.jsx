@@ -1,62 +1,52 @@
-import { FaHeartbeat, FaProcedures, FaStethoscope } from "react-icons/fa";
+import { FaDiagnoses, FaVial, FaWaveSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
+const services = [
+  {
+    title: "Esophageal Manometry",
+    text: "High-resolution pressure testing for swallowing, chest discomfort, and reflux concerns.",
+    to: "/esophageal",
+    icon: FaWaveSquare
+  },
+  {
+    title: "Esophageal pH studies",
+    text: "Objective reflux studies that measure acid exposure and connect symptoms to data.",
+    to: "/ph-monitoring",
+    icon: FaVial
+  },
+  {
+    title: "Anorectal Manometry",
+    text: "Specialized testing for constipation, bowel control, and pelvic floor coordination.",
+    to: "/anorectal",
+    icon: FaDiagnoses
+  }
+];
 
 export default function Services() {
   return (
-    <section style={section}>
-      <h2 style={title}>Our Services</h2>
+    <section className="home-section services-section">
+      <div className="section-heading">
+        <span className="eyebrow">Specialized diagnostics</span>
+        <h2>Motility and reflux testing with a premium patient experience</h2>
+        <p>
+          Focused procedures, modern equipment, and clear guidance from preparation to results.
+        </p>
+      </div>
 
-      <div style={grid}>
-        
-        <Link to="/esophageal" className="card" style={card}>
-          <FaHeartbeat size={40} color="#0ea5e9" />
-          <h3>Esophageal Manometry</h3>
-          <p>Measures esophageal pressure and function.</p>
-        </Link>
+      <div className="service-card-grid">
+        {services.map((service) => {
+          const Icon = service.icon;
 
-        <Link to="/ph-monitoring" className="card" style={card}>
-          <FaStethoscope size={40} color="#0ea5e9" />
-          <h3>pH Monitoring</h3>
-          <p>Detects acid reflux over time.</p>
-        </Link>
-
-        <Link to="/anorectal" className="card" style={card}>
-          <FaProcedures size={40} color="#0ea5e9" />
-          <h3>Anorectal Manometry</h3>
-          <p>Evaluates rectal muscle function.</p>
-        </Link>
-
+          return (
+            <Link to={service.to} className="premium-card service-card" key={service.to}>
+              <Icon />
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
+              <span>Explore service</span>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );
 }
-
-/* STYLES */
-
-const section = {
-  padding: "80px 40px",
-  textAlign: "center",
-  background: "#f8fafc"
-};
-
-const title = {
-  fontSize: "28px",
-  marginBottom: "20px",
-  color: "#1e293b"
-};
-
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "25px",
-  marginTop: "30px"
-};
-
-const card = {
-  background: "#ffffff",
-  padding: "30px",
-  borderRadius: "12px",
-  textDecoration: "none",
-  color: "#1e293b",
-  boxShadow: "0 5px 15px rgba(0,0,0,0.05)"
-};

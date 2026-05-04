@@ -1,46 +1,69 @@
+import ServicePage from "../components/ServicePage";
+import image from "../assets/images/esophageal-manometry-procedure.jpeg";
+import supportingImage from "../assets/images/esophageal-manometry-illustration.jpeg";
+
 export default function Esophageal() {
   return (
-    <section style={section}>
-      <h1>Esophageal Manometry</h1>
-
-      <p style={intro}>
-        A diagnostic procedure used to evaluate the function of the esophagus.
-      </p>
-
-      <div style={grid}>
-        <div className="card">
-          <h3>What it checks</h3>
-          <p>Pressure and muscle coordination.</p>
-        </div>
-
-        <div className="card">
-          <h3>Who needs it</h3>
-          <p>Patients with swallowing issues.</p>
-        </div>
-
-        <div className="card">
-          <h3>Procedure</h3>
-          <p>Quick and minimally invasive.</p>
-        </div>
-      </div>
-    </section>
+    <ServicePage
+      eyebrow="High-resolution esophageal manometry"
+      title="Understand how your esophagus is working"
+      summary="Esophageal manometry measures the muscle contractions of the esophagus and the function of the lower esophageal sphincter, helping explain swallowing symptoms and reflux-related concerns."
+      heroImage={image}
+      supportingImage={supportingImage}
+      highlights={[
+        {
+          kicker: "Measures",
+          title: "Swallowing coordination",
+          text: "Assesses how smoothly the esophageal muscles move food toward the stomach."
+        },
+        {
+          kicker: "Clarifies",
+          title: "Sphincter function",
+          text: "Checks whether the lower esophageal sphincter opens and closes properly."
+        },
+        {
+          kicker: "Guides",
+          title: "Treatment decisions",
+          text: "Provides objective data your doctor can use to choose the right next step."
+        }
+      ]}
+      evaluatesTitle="Clinical insight"
+      evaluates={[
+        "Swallowing function",
+        "Coordination and strength of esophageal muscles",
+        "Lower esophageal sphincter opening and closing"
+      ]}
+      symptomsTitle="Symptoms"
+      symptoms={[
+        "Difficulty swallowing",
+        "Chest pain not related to the heart",
+        "Persistent reflux symptoms"
+      ]}
+      conditionsTitle="Diagnostic clarity"
+      conditions={[
+        "Achalasia",
+        "Gastroesophageal reflux disease",
+        "Esophageal spasm"
+      ]}
+      processTitle="Patient experience"
+      process={[
+        {
+          title: "Focused preparation",
+          text: "You receive clear instructions before the procedure so the results are useful."
+        },
+        {
+          title: "Pressure measurement",
+          text: "A thin catheter measures muscle pressure and coordination during swallows."
+        },
+        {
+          title: "Specialist interpretation",
+          text: "The findings help your doctor understand whether muscle or sphincter function is contributing to symptoms."
+        }
+      ]}
+      importance={{
+        title: "Precise motility testing helps turn vague symptoms into a clear plan.",
+        text: "When swallowing difficulty, unexplained chest discomfort, or reflux symptoms persist, manometry can reveal whether the esophagus is moving and relaxing as it should."
+      }}
+    />
   );
 }
-
-const section = {
-  padding: "80px 40px",
-  textAlign: "center"
-};
-
-const intro = {
-  maxWidth: "600px",
-  margin: "20px auto",
-  textAlign: "center"
-};
-
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "20px",
-  marginTop: "40px"
-};

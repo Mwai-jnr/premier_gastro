@@ -35,7 +35,7 @@ export default function Blog() {
             <h3>{b.title}</h3>
             <p style={desc}>{b.desc}</p>
 
-            <span style={readMore}>Read More →</span>
+            <span style={readMore}>Read More</span>
           </div>
         ))}
       </div>

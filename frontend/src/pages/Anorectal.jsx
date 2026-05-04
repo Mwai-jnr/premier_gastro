@@ -1,51 +1,69 @@
+import ServicePage from "../components/ServicePage";
+import image from "../assets/images/anorectal_.jpg";
+
 export default function Anorectal() {
   return (
-    <section style={section}>
-      <h1>Anorectal Manometry</h1>
-
-      <p style={intro}>
-        A specialized test used to evaluate the function of the rectum and anal sphincter muscles.
-      </p>
-
-      <div style={grid}>
-        <div className="card">
-          <h3>What It Checks</h3>
-          <p>Muscle strength and coordination.</p>
-        </div>
-
-        <div className="card">
-          <h3>Who Needs It</h3>
-          <p>Patients with constipation or incontinence.</p>
-        </div>
-
-        <div className="card">
-          <h3>Procedure</h3>
-          <p>Simple, safe, and minimally invasive.</p>
-        </div>
-
-        <div className="card">
-          <h3>Outcome</h3>
-          <p>Helps guide treatment and improve quality of life.</p>
-        </div>
-      </div>
-    </section>
+    <ServicePage
+      eyebrow="Anorectal manometry"
+      title="Detailed answers for bowel control and pelvic floor function"
+      summary="Anorectal manometry evaluates how well the muscles and nerves in the rectum and anus work together, helping investigate constipation, stool leakage, and defecation difficulty."
+      heroImage={image}
+      highlights={[
+        {
+          kicker: "Measures",
+          title: "Anal sphincter strength",
+          text: "Assesses the muscles responsible for bowel control."
+        },
+        {
+          kicker: "Evaluates",
+          title: "Rectal sensation",
+          text: "Checks how the rectum senses filling and responds during bowel function."
+        },
+        {
+          kicker: "Reveals",
+          title: "Muscle coordination",
+          text: "Shows whether rectal pressure and anal relaxation are working together correctly."
+        }
+      ]}
+      evaluatesTitle="What the test evaluates"
+      evaluates={[
+        "Strength of the anal sphincter muscles",
+        "Sensation in the rectum",
+        "Reflexes needed for normal bowel movements",
+        "Coordination between rectal pressure and anal relaxation"
+      ]}
+      symptomsTitle="Symptoms"
+      symptoms={[
+        "Chronic constipation",
+        "Difficulty passing stool",
+        "Fecal incontinence",
+        "Suspected pelvic floor dysfunction"
+      ]}
+      conditionsTitle="Diagnostic clarity"
+      conditions={[
+        "Dyssynergic defecation",
+        "Fecal incontinence",
+        "Hirschsprung disease"
+      ]}
+      processTitle="Patient pathway"
+      process={[
+        {
+          title: "Comfort-first setup",
+          text: "The test is explained clearly before it begins so you know what to expect."
+        },
+        {
+          title: "Muscle and reflex testing",
+          text: "Specialized measurements show how the anorectal muscles and nerves respond."
+        },
+        {
+          title: "Treatment direction",
+          text: "Results can guide biofeedback therapy, medications, or specialist treatment."
+        }
+      ]}
+      importance={{
+        title: "The right diagnosis helps avoid trial-and-error treatment.",
+        text: "Detailed anorectal function data is essential for choosing treatment that matches the true cause of constipation, incontinence, or pelvic floor dysfunction."
+      }}
+    />
   );
 }
-
-const section = {
-  padding: "80px 40px",
-  textAlign: "center"
-};
-
-const intro = {
-  maxWidth: "600px",
-  margin: "20px auto",
-  textAlign: "center"
-};
-
-const grid = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-  gap: "20px",
-  marginTop: "40px"
-};
